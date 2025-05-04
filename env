@@ -1,0 +1,15 @@
+
+
+CLAH_DOCKER_HOST_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K\S+')
+
+CLAH_SC_CONTAINER_NAME="clah-sc"
+CLAH_SC_CONTAINER_IMAGE="clah-sc-image"
+CLAH_SC_VOLUME_NAME="clah-sc-data"
+CLAH_SC_CONTAINER_PORT="16500"
+CLAH_SC_ENDPOINT="http://${CLAH_DOCKER_HOST_IP}:${CLAH_SC_CONTAINER_PORT}"
+
+
+
+
+
+
