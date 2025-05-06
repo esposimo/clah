@@ -1,0 +1,50 @@
+
+
+CLAH_DOCKER_HOST_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K\S+')
+CLAH_DOCKER_NETWORK_NAME="clah-infra-network"
+CLAH_DOCKER_NETWORK_GATEWAY="10.20.150.1"
+CLAH_DOCKER_NETWORK_SUBNET="10.20.150.0/24"
+
+CLAH_SC_CONTAINER_NAME="clah-sc"
+CLAH_SC_CONTAINER_IMAGE="clah-sc-image"
+CLAH_SC_VOLUME_NAME="clah-sc-data"
+CLAH_SC_CONTAINER_PORT="16500"
+CLAH_SC_ENDPOINT="http://${CLAH_DOCKER_HOST_IP}:${CLAH_SC_CONTAINER_PORT}"
+
+
+CLAH_ELASTIC_MASTER_DATA_PATH="/data/elastic/hot"
+CLAH_ELASTIC_COLD_DATA_PATH="/data/elastic/cold"
+
+RUNNING_PATH=$(pwd)
+
+
+
+source $CLAH_BIN/tools/utils.sh
+
+VARS_TO_CHECK=("$CLAH_SC_CONTAINER_NAME" "$CLAH_SC_CONTAINER_IMAGE" "$CLAH_SC_VOLUME_NAME" "$CLAH_SC_CONTAINER_PORT" 
+"$CLAH_DOCKER_NETWORK_NAME" "$CLAH_DOCKER_NETWORK_GATEWAY" "$CLAH_DOCKER_NETWORK_SUBNET"
+"$CLAH_ELASTIC_MASTER_DATA_PATH" "$CLAH_ELASTIC_COLD_DATA_PATH")
+
+
+all_set=true
+for val in "${VARS_TO_CHECK[@]}"; do
+  if [[ -z "$val" ]]; then
+    all_set=false
+    break
+  fi
+done
+
+if ! $all_set; then
+  print_ko "Una o più variabili d'ambiente nel file ./env non è stata valorizzata\n";
+  exit 1;
+fi
+
+
+#if [[ -z "${CLAH_SC_CONTAINER_NAME}" || -z "${CLAH_SC_CONTAINER_IMAGE}" || -z "${CLAH_SC_VOLUME_NAME}" || -z "${CLAH_SC_CONTAINER_PORT}" ]] ; then
+#  print_ko "Una o più variabili d'ambiente nel file ./env non è stata valorizzata\n";
+#  exit 1;
+#fi;
+
+
+
+
