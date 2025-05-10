@@ -36,4 +36,4 @@ jobs:
           pip install mkdocstrings[python]
           pip install Pygments
       - name: Build and deploy with MkDocs
-        run: mkdocs build -f docs/mkdocs.yml
+        run: mkdocs build -f docs/mkdocs.yml --verbose
