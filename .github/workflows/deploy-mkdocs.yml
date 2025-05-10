@@ -24,6 +24,8 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: List files in docs directory (Debugging)
+        run: pwd && ls -l   # Controlla la struttura dei file nella cartella docs
 
       - name: Install MkDocs and dependencies
         run: |
