@@ -27,7 +27,7 @@ jobs:
           pip install mkdocs-material  # Rimuovi se non usi il tema Material
           pip install mkdocs-macros-plugin
           pip install mkdocs-glightbox
-          pip install mkdocstring-python
+          pip install mkdocstrings[python]
           pip install Pygment
       - name: Build and deploy with MkDocs
         run: mkdocs gh-deploy --force
