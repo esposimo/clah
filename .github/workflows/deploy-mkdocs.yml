@@ -28,6 +28,6 @@ jobs:
           pip install mkdocs-macros-plugin
           pip install mkdocs-glightbox
           pip install mkdocstrings[python]
-          pip install Pygment
+          pip install Pygments
       - name: Build and deploy with MkDocs
         run: mkdocs gh-deploy --force
