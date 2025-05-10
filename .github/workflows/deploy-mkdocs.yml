@@ -34,4 +34,4 @@ jobs:
           pip install mkdocstrings[python]
           pip install Pygments
       - name: Build and deploy with MkDocs
-        run: mkdocs gh-deploy --force
+        run: mkdocs gh-deploy --force --config-file docs/mkdocs.yml
