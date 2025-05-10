@@ -16,6 +16,14 @@ terraform {
       source  = "hashicorp/http"
       version = "3.5.0"
     }
+    null = {
+      source = "hashicorp/null"
+      version = "3.2.4"
+    }
+    vault = {
+      source = "hashicorp/vault"
+      version = "4.8.0"
+    }
   }
   backend "consul" { }
 }
@@ -32,5 +40,11 @@ provider "consul" {
 provider "vaultoperator" {
   # example configuration here
   vault_addr        = "https://${var.vault-address-v4}:8200"
-  vault_skip_verify = true  
+  vault_skip_verify = true
+}
+
+provider "vault" {
+  address         = "https://${var.vault-address-v4}:8200"
+  token           = vaultoperator_init.vault_bootstrap.root_token
+  skip_tls_verify = true
 }

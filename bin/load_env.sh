@@ -8,7 +8,7 @@
 # fi
 
 CLAH_TOOLS_PATH="${CLAH_BIN}/tools"
-source ${CLAH_TOOLS_PATH}/_autocomplete.sh
+source ${CLAH_TOOLS_PATH}/autocomplete.sh
 
 alias clah="${CLAH_BIN}/clah.sh $@"
 

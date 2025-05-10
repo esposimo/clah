@@ -27,7 +27,7 @@ nl() {
 }
 
 # manage sc data
-put_kv_curl()
+put_sc_curl()
 {
   KEY_NAME=$1
   shift 1;
@@ -41,7 +41,7 @@ put_kv_curl()
   print_ok "inserted ${KEY_NAME}\n";
 }
 
-put_kv_docker()
+put_sc_docker()
 {
   KEY_NAME=$1
   shift 1;
@@ -56,20 +56,20 @@ put_kv_docker()
   print_ok "inserted ${KEY_NAME}\n";
 }
 
-get_kv_curl()
+get_sc_curl()
 {
   KEY_NAME=$1
   RETURN_VALUE=$(curl ${CLAH_SC_ENDPOINT}/v1/kv/${KEY_NAME} 2>/dev/null | jq -r '.[0].Value' | base64 --decode)
   printf "${RETURN_VALUE}";
 }
 
-get_kv_docker()
+get_sc_docker()
 {
   KEY_NAME=$1
   docker exec -it ${CLAH_SC_CONTAINER_NAME} consul kv get ${KEY_NAME} || { print_ko "Error on insert ${KEY_NAME}"; exit 1; }
 }
 
-ls_kv_curl()
+ls_sc_curl()
 {
   KEY_NAME=$1
   if [[ -z $KEY_NAME ]] ; then
@@ -79,7 +79,7 @@ ls_kv_curl()
   curl ${CLAH_SC_ENDPOINT}/v1/kv/${KEY_NAME}/?keys 2>/dev/null | jq -r '.[]' || { print_ko "Error in get ${KEY_NAME}"; exit 1; };
 }
 
-ls_kv_docker()
+ls_sc_docker()
 {
   KEY_NAME=$1
   if [[ -z $KEY_NAME ]] ; then
@@ -89,26 +89,26 @@ ls_kv_docker()
   docker exec -it ${CLAH_SC_CONTAINER_NAME} consul kv get -recurse -keys ${KEY_NAME} || { print_ko "Error in get ${KEY_NAME}"; exit 1; };
 }
 
-rm_kv_curl()
+rm_sc_curl()
 {
   KEY_NAME=$1
   curl -X DELETE ${CLAH_SC_ENDPOINT}/v1/kv/${KEY_NAME} 2>/dev/null 1>&2 || { print_ko "Error while removing ${KEY_NAME}"; exit 1; };
   print_ok "deleted ${KEY_NAME}\n";
 }
 
-lget_kv_docker()
+lget_sc_docker()
 {
   KEY_NAME=$1
   docker exec -it ${CLAH_SC_CONTAINER_NAME} consul kv get -recurse ${KEY_NAME} | grep -v '^[[:space:]]*$' || { print_ko "Error in get ${KEY_NAME}"; exit 1; };
 }
 
-lget_kv_curl()
+lget_sc_curl()
 {
   KEY_NAME=$1
   curl -s ${CLAH_SC_ENDPOINT}/v1/kv/${KEY_NAME}/?recurse  | jq -r '.[] | "\(.Key): \(.Value)"' | while IFS=':' read -r key val; do printf "${key}:$(echo ${val} | base64 --decode)\n\n"; done
 }
 
-rm_kv_docker()
+rm_sc_docker()
 {
   KEY_NAME=$1
   docker exec -it ${CLAH_SC_CONTAINER_NAME} consul kv delete ${KEY_NAME} 2>/dev/null 1>&2 || { print_ko "Error while removing ${KEY_NAME}"; exit 1; };

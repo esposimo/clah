@@ -77,15 +77,15 @@ resource "consul_keys" "storage_engine_service_config" {
   }
   key {
     path  = "infrastructure/storage-engine/external-ip"
-    value = local.external_ip
+    value = local.external-ip
   }
   key {
     path  = "infrastructure/storage-engine/external-port"
-    value = local.external_storage_engine_port
+    value = local.external-storage-engine-port
   }
   key {
     path  = "infrastructure/storage-engine/external-endpoint"
-    value = local.external_storage_engine_endpoint
+    value = local.external-storage-engine-endpoint
   }
 }
 
@@ -101,14 +101,14 @@ resource "tls_self_signed_cert" "vault_certificate" {
   private_key_pem = tls_private_key.vault_certificate_key.private_key_pem
 
   subject {
-    common_name         = local.certs.common_name
-    country             = local.certs.country
-    province            = local.certs.province
-    locality            = local.certs.locality
-    organization        = local.certs.organization
+    common_name         = local.certs.vault.common-name
+    country             = local.certs.vault.country
+    province            = local.certs.vault.province
+    locality            = local.certs.vault.locality
+    organization        = local.certs.vault.organization
   }
 
-  dns_names             = local.certs.dns_names
+  dns_names             = local.certs.vault.dns-names
   validity_period_hours = 8760
 
   allowed_uses = [
@@ -176,22 +176,22 @@ resource "docker_container" "vault_container" {
   }
 
   upload {
-    file          = local.certs.cert_file
+    file          = local.certs.vault.cert-file
     content       = tls_self_signed_cert.vault_certificate.cert_pem
     permissions   = "0644"
   }
 
   upload {
-    file          = local.certs.key_file
+    file          = local.certs.vault.key-file
     content       = tls_private_key.vault_certificate_key.private_key_pem
     permissions   = "0644"
   }
 
   upload {
     content    = templatefile("./config/vault.hcl", {
-      cert_file               = local.certs.cert_file ,
-      key_file                = local.certs.key_file ,
-      storage_engine_endpoint = local.external_storage_engine_endpoint
+      cert_file               = local.certs.vault.cert-file ,
+      key_file                = local.certs.vault.key-file ,
+      storage_engine_endpoint = local.external-storage-engine-endpoint
     })
     file = "/vault/config/vault.hcl"
   }
@@ -230,15 +230,15 @@ resource "consul_keys" "vault_service_config" {
   }
   key {
     path  = "infrastructure/vault/external-ip"
-    value = local.external_ip
+    value = local.external-ip
   }
   key {
     path  = "infrastructure/vault/external-port"
-    value = local.external_vault_port
+    value = local.external-vault-port
   }
   key {
     path  = "infrastructure/vault/external-endpoint"
-    value = local.external_vault_endpoint
+    value = local.external-vault-endpoint
   }
 }
 
@@ -264,9 +264,22 @@ resource "consul_keys" "config_vault_secret" {
 }
 
 data "http" "unseal_vault" {
-  depends_on = [ vaultoperator_init.vault_bootstrap ]
-  url = "${local.external_vault_endpoint}/v1/sys/unseal"
+  url = "${local.external-vault-endpoint}/v1/sys/unseal"
   insecure = true
   method = "POST"
   request_body = format("{\"key\":\"%s\"}", vaultoperator_init.vault_bootstrap.keys[0])
+}
+
+resource "vault_mount" "sops" {
+  #depends_on = [ data.http.unseal_vault ]
+  path                      = "sops-kv"
+  type                      = "transit"
+  description               = "Chiavi di crittografia per sops"
+}
+
+resource "vault_transit_secret_backend_key" "key" {
+  #depends_on = [ vault_mount.sops ]
+  backend = vault_mount.sops.path
+  name    = "sops-key-infrastructure"
+  deletion_allowed = true
 }
