@@ -9,6 +9,7 @@ nav:
     - Requirements: requirements.md
     - Getting Started!: 'getting-started.md'
     - Initialize SC: sc-install.md
+    - Vault: vault.md
   - About: 'about.md'
 
 theme:
