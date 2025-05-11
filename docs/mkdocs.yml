@@ -50,6 +50,5 @@ markdown_extensions:
 plugins:
 - search
 - mkdocstrings
-- info
 - open-in-new-tab:
     add_icon: true
