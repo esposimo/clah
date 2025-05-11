@@ -35,7 +35,7 @@ Provisioning, configuration, and daily management are handled via the `clah` **c
 
 > A future release will include an **HTTP API layer** as an alternative to the CLI tool, enabling programmatic control and integration with graphical interfaces or external systems.
 
-## 🌐 Equivalent to public cloud services
+## 🌐 Compare to public cloud services
 
 | Clah Service            | Public Cloud Equivalent | Functionality                                  |
 |-------------------------|--------------------------|------------------------------------------------|

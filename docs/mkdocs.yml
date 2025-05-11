@@ -1,12 +1,20 @@
 site_name: Clah Documentation
+site_url: https://github.com/esposimo/clah
 repo_url: https://github.com/esposimo/clah
 site_description: Official Clah Documentation
 
 nav:
-  - 'index.md'
-  - 'about.md'
+  - Home: 'index.md'
+  - Install:
+    - Requirements: requirements.md
+    - Getting Started!: 'getting-started.md'
+    - Initialize SC: sc-install.md
+  - About: 'about.md'
 
 theme:
+  features:
+    - navigation.tabs
+    - navigation.path
   name: material
   features:
     - content.code.copy
@@ -43,3 +51,5 @@ plugins:
 - search
 - mkdocstrings
 - info
+- open-in-new-tab:
+    add_icon: true
