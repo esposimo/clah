@@ -9,7 +9,22 @@ nav:
     - Requirements: requirements.md
     - Getting Started!: 'getting-started.md'
     - Initialize SC: sc-install.md
+    - Network: network.md
     - Vault: vault.md
+  - Service Config:
+    - Put and Get information: put-get-sc.md
+    - Infrastructure path: infra-path-sc.md
+  - Manage Secrets:
+    - How to use SOPS: how-use-sops.md
+    - Works with KV: create-kv.md
+  - Platforms:
+    - Terraform: terraform.md
+    - Docker: docker.md
+    - SOPS: sops.md
+  - CLAH cli:
+    - Usage: clah-command.md
+    - sc: cli-sc.md
+    - sops: cli-sops.md
   - About: 'about.md'
 
 theme:
@@ -36,7 +51,6 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
-
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true

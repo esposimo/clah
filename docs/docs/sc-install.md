@@ -1,4 +1,4 @@
-# Step 1 – Launch the Consul Container (Service Config)
+# Launch the Consul Container (Service Config)
 
 The first essential component to deploy in the CLAH infrastructure is the **Consul container**. This instance of Consul acts as a **Service Config Registry**, storing key infrastructure metadata that will be used by other services and deployment scripts.
 
@@ -16,13 +16,13 @@ The Consul container provides a central registry to:
 
 ## ▶️ How to launch it
 
-From your project root (`$CLAH_HOME`), run the following script:
+Run the following command:
 
 ```bash title="bash"
 $ clah sc init
 ```
 
-This script will:
+This command will:
 
 - Build and start a Consul Docker container.
 - Expose it on port 15080 of the host machine.
@@ -32,12 +32,12 @@ This script will:
 Once started, you can access the HTTP web console at:
 
 ```bash title="bash"
-$ http://<your-host>:15080
+$ http://<docker-host>:15080
 ```
 
 and HTTP API at:
 ```bash title="bash"
-$ http://<your-host>:15080/v1/kv
+$ http://<docker-host>:15080/v1/kv
 ```
 
 ## ⚙️ Configuration Variables
@@ -60,33 +60,22 @@ export SC_CONTAINER_NAME=my-consul
 clah sc init
 ```
 
+!!! warning
+    If you change the default port of the Service Config service, you will need to update the `backend.tfvars` file in the Terraform projects under `infrastructure/`
+
 ## 🔒 Security Considerations
 
-The Consul instance started by `consul-tf-state.sh` is intentionally configured without ACLs and uses unencrypted communication. This setup is **only intended for local or LAN-restricted environments** during development or home lab usage.
+The Consul instance started by `clah sc init` is intentionally configured without ACLs and uses unencrypted communication. This setup is **only intended for local or LAN-restricted environments**.
 
 **⚠️ Never expose this Consul service directly to the internet.**
-
-It is strongly recommended to:
-
-- Deploy the service on an isolated network segment.
-- Use firewall rules to limit access to trusted machines only.
-- Enable ACLs and TLS if you plan to use this in a production-like or semi-public environment (refer to the [official Consul security documentation](https://developer.hashicorp.com/consul/docs/security) for details).
 
 This Consul instance is designed to act as a lightweight **Service Config Registry**, storing useful infrastructure metadata such as:
 
 - Endpoints of core services (Vault, API Gateway, etc.)
 - Runtime configuration for deploy scripts
 
-## ⏭️ Next Step: Initialize Vault
+## ⏭️ Next Step: Initialize Network
 
-With the Service Config (Consul) now running, the next step is to initialize **Vault**, the core component for managing secrets and cryptographic keys in your CLAH environment.
-
-Vault will be configured to use the Consul instance as its storage backend, enabling persistent and consistent secret management across your infrastructure.
-
-➡️ Follow the guide at [Vault Initialization](vault.md) to:
-
-- Start the Vault container
-- Initialize the key store
-- Unseal the Vault
-- Store essential infrastructure secrets
+With the Service Config (Consul) now running, the next step is to initialize **Infrastructure Network**.
+➡️ Follow the guide at [Infrastructure Network](network.md)
 
