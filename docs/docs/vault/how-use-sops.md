@@ -1,0 +1,1 @@
+# Use SOPS for secret management

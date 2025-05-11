@@ -4,28 +4,28 @@ repo_url: https://github.com/esposimo/clah
 site_description: Official Clah Documentation
 
 nav:
-  - Home: 'index.md'
+  - Home: index.md
   - Install:
-    - Requirements: requirements.md
-    - Getting Started!: 'getting-started.md'
-    - Initialize SC: sc-install.md
-    - Network: network.md
-    - Vault: vault.md
+    - Requirements: ./install/requirements.md
+    - Getting Started!: ./install/getting-started.md
+    - Service Config: ./install/sc-install.md
+    - Network: ./install/network.md
+    - Vault: ./install/vault.md
   - Service Config:
-    - Put and Get information: put-get-sc.md
-    - Infrastructure path: infra-path-sc.md
+    - Put and Get information: ./service-config/put-get-sc.md
+    - Infrastructure path: ./service-config/infra-path-sc.md
   - Manage Secrets:
-    - How to use SOPS: how-use-sops.md
-    - Works with KV: create-kv.md
+    - How to use SOPS: ./vault/how-use-sops.md
+    - Works with KV: ./vault/create-kv.md
   - Platforms:
-    - Terraform: terraform.md
-    - Docker: docker.md
-    - SOPS: sops.md
+    - Terraform: ./platforms/terraform.md
+    - Docker: ./platforms/docker.md
+    - SOPS: ./platforms/sops.md
   - CLAH cli:
-    - Usage: clah-command.md
-    - sc: cli-sc.md
-    - sops: cli-sops.md
-  - About: 'about.md'
+    - Usage: ./cli/clah-command.md
+    - sc: ./cli/cli-sc.md
+    - sops: ./cli/cli-sops.md
+  - About: about.md
 
 theme:
   features:
