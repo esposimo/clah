@@ -1,8 +1,8 @@
-# Infrastructure Network Setup
+# Infrastructure Network
 
 The first Terraform-based step in the CLAH initialization process is the creation of the **infrastructure network**. This network will exclusively host core CLAH services such as the API Gateway, Authentication Service, Key Vault, and others.
 
-## Step 1: Create the Infrastructure Network
+## Create the Infrastructure Network
 
 To create the network, run the following script:
 
@@ -22,7 +22,7 @@ network-infra-subnet  = "10.190.10.1/24"
 
 Once the script is executed, a new infrastructure network will be created using these values.
 
-## Step 2: Customize Network Configuration
+## Customize Network Configuration
 
 The `variables.tfvars` file defines the core parameters for the infrastructure network. You can modify these values before running the `apply.sh` script if you want to change the network configuration.
 
@@ -39,7 +39,7 @@ Here’s a breakdown of the variables:
 
 To apply your own custom network configuration, simply edit the file `$CLAH_HOME/infrastructure/network/config/variables.tfvars` before running the apply script.
 
-## Step 3: Values Stored in Service Config
+## Values Stored in Service Config
 
 Once the network is created, the following values will be automatically stored in the Service Config (Consul) under these paths:
 
@@ -55,7 +55,7 @@ These paths are essential for other services to retrieve the infrastructure netw
     You may edit this script if you want to manually define the IP address of the Docker host instead of detecting it automatically.
 
 
-## Step 4: Proceed to Vault Setup
+## Proceed to Vault Setup
 
 With the infrastructure network successfully created and registered in the Service Config, you're now ready to move on to the next critical step: setting up the **Vault** service.
 

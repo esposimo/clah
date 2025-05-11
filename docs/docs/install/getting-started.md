@@ -1,4 +1,4 @@
-## 1. Clone the Repository
+## Clone the Repository
 
 Clone the GitHub repository into your preferred project directory:
 
@@ -7,7 +7,7 @@ git clone https://github.com/esposimo/clah.git <project-dir>
 ```
 Replace <project-dir> with the absolute path where you want to store the project files.
 
-## 2. Configure Your Shell Environment
+## Configure Your Shell Environment
 
 Modify your `~/.bashrc` (or equivalent shell config file, e.g., `~/.zshrc`) to set the required environment variables:
 
@@ -23,7 +23,7 @@ fi
 Replace <project-dir> with the path where you cloned the repository.
 This configuration will allow you to use the clah command from any terminal session.
 
-## 3. Reload Your Shell Environment
+## Reload Your Shell Environment
 
 After modifying your shell configuration file, apply the changes by either:
 
@@ -35,6 +35,6 @@ source ~/.bashrc
 ```
 Once reloaded, the clah command should be available in your terminal.
 
-## 4. Now CLAH it's ready
+## Now CLAH it's ready
 
 The CLAH environment has been successfully installed. Proceed with the service startup process by following the step-by-step guide.

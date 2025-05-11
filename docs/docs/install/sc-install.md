@@ -1,4 +1,4 @@
-# Launch the Consul Container (Service Config)
+# Service Config
 
 The first essential component to deploy in the CLAH infrastructure is the **Consul container**. This instance of Consul acts as a **Service Config Registry**, storing key infrastructure metadata that will be used by other services and deployment scripts.
 
