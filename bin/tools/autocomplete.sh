@@ -7,11 +7,14 @@ _clah_complete()
     _init_completion || return
 
     case "${words[1]}" in
+        sc)
+            COMPREPLY=( $(compgen -W "init destroy" -- "$cur") )
+            ;;
         sops)
             COMPREPLY=( $(compgen -W "encrypt decrypt new edit" -- "$cur") )
             ;;
         *)
-            COMPREPLY=( $(compgen -W "sops elastic vault users" -- "$cur") )
+            COMPREPLY=( $(compgen -W "sops elastic vault users sc" -- "$cur") )
             ;;
     esac
 }

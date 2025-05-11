@@ -19,7 +19,7 @@ The Consul container provides a central registry to:
 From your project root (`$CLAH_HOME`), run the following script:
 
 ```bash title="bash"
-$ ./bin/consul-tf-state.sh
+$ clah sc init
 ```
 
 This script will:
@@ -57,7 +57,7 @@ You can override these by exporting them in your shell before launching the scri
 ```bash title="bash"
 export SC_HOST_PORT=15100
 export SC_CONTAINER_NAME=my-consul
-./bin/consul-tf-state.sh
+clah sc init
 ```
 
 ## 🔒 Security Considerations

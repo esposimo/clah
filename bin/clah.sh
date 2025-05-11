@@ -10,6 +10,7 @@ usage()
     printf "Usage:\n  clah <command> <options>\n\n";
     printf "Cloud at Home - Manage your local cloud infrastracture components\n\n";
     printf "Available Commands:\n"
+    printf "  sc\t\tInitialize Service Config\n";
     printf "  sops\t\tManage secrets using SOPS\n";
     printf "  vault\t\tInteract with HashiCorp Vault\n"
     printf "  users\t\tManage users\n";
@@ -34,6 +35,9 @@ show_version()
 }
 
 case "$COMMAND" in
+    sc)
+        $CLAH_HOME/scripts/consul-tf-state.sh "$@"
+        ;;
     sops)
         $CLAH_BIN/tools/sops.sh "$@"
         ;;
