@@ -35,24 +35,6 @@ source ~/.bashrc
 ```
 Once reloaded, the clah command should be available in your terminal.
 
-## 4. Initialize the CLAH Environment
+## 4. Now CLAH it's ready
 
-Run the following command to initialize the environment:
-
-```bash title="bash"
-clah init
-```
-
-!!! info
-    This command will start the Consul container, which runs on port 15080 of your Docker host.
-    If you need to change this port or customize the container setup, refer to the documentation for clah init.
-
-
-## 5. Access the Dashboard
-
-Once the initialization is complete, your local environment is ready to use.
-
-You can now access the main dashboard at: [http://localhost:9080]([http://localhost:9080])
-
-
-Replace `localhost` with the IP address or hostname of your NUC if you're accessing it from another machine.
+The CLAH environment has been successfully installed. Proceed with the service startup process by following the step-by-step guide.
