@@ -1,0 +1,58 @@
+name: Deploy MkDocs documentation to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "docs/**"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: List files in docs directory (Debugging)
+        run: pwd && ls -l   # Controlla la struttura dei file nella cartella docs
+
+      - name: Install MkDocs and dependencies
+        run: |
+          pip install mkdocs
+          pip install mkdocs-material  # Rimuovi se non usi il tema Material
+          pip install mkdocs-macros-plugin
+          pip install mkdocs-glightbox
+          pip install mkdocstrings[python]
+          pip install Pygments
+      - name: Build and deploy with MkDocs
+        run: mkdocs build -f docs/mkdocs.yml --verbose
+      - name: Deploy to GitHub Pages
+        run: mkdocs gh-deploy -f docs/mkdocs.yml --force
+      - name: Upload artifact
+        # Automatically uploads an artifact from the './_site' directory by default
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/site/
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
