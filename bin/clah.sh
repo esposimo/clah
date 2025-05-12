@@ -10,7 +10,8 @@ usage()
     printf "Usage:\n  clah <command> <options>\n\n";
     printf "Cloud at Home - Manage your local cloud infrastracture components\n\n";
     printf "Available Commands:\n"
-    printf "  sc\t\tInitialize Service Config\n";
+    printf "  config\t\tManage information on Service Config\n";
+    printf "  init\t\tInitialize Service for Clah\n";
     printf "  sops\t\tManage secrets using SOPS\n";
     printf "  vault\t\tInteract with HashiCorp Vault\n"
     printf "  users\t\tManage users\n";
@@ -21,7 +22,7 @@ usage()
     printf "  -v, --version\tPrint the version of clah\n";
     printf "\n";
     printf "Examples:\n";
-    printf "  clah sc get infrastructure/vault-external-ip\n";
+    printf "  clah config get infrastructure/vault-external-ip\n";
     printf "  clah sops encrypt secrets.json\n";
     printf "  clah vault get mysql-kv/password\n";
     printf "\n";
@@ -35,8 +36,14 @@ show_version()
 }
 
 case "$COMMAND" in
-    sc)
-        $CLAH_HOME/scripts/consul-tf-state.sh "$@"
+    config)
+        $CLAH_BIN/tools/sc.sh "$@"
+        ;;
+    init)
+        $CLAH_BIN/tools/bs.sh init "$@"
+        ;;
+    destroy)
+        $CLAH_BIN/tools/bs.sh destroy "$@"
         ;;
     sops)
         $CLAH_BIN/tools/sops.sh "$@"
