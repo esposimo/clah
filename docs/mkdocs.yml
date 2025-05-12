@@ -85,15 +85,5 @@ nav:
 plugins:
 - search
 - mkdocstrings
-- social
 - open-in-new-tab:
     add_icon: true
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/esposimo/clah
-    - icon: fontawesome/brands/facebook
-      link: https://www.facebook.com/SeiIlTopDeiTopTopper
-    - icon: fontawesome/brands/instagram
-      link: https://www.instagram.com/simonello86/
