@@ -35,6 +35,21 @@ source ~/.bashrc
 ```
 Once reloaded, the clah command should be available in your terminal.
 
-## Now CLAH it's ready
+## Quick Start
 
-The CLAH environment has been successfully installed. Proceed with the service startup process by following the step-by-step guide.
+You can initialize the entire CLAH infrastructure with a single command:
+
+```bash
+clah init all
+```
+This command will automatically execute all the required steps in the correct order, using the default configuration files.
+
+!!! tip
+    The `clah init all` command is intended for users who want a ready-to-use setup with default values.
+    If you prefer to customize the configuration or understand how CLAH works internally, follow each section in this documentation manually.
+
+Step by step documentation to have full control and understanding each component in the setup process
+
+- [Service Config](./sc-install.md)
+- [Network](./network.md)
+- [Vault](./vault.md)

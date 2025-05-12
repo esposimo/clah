@@ -1,38 +1,18 @@
 site_name: Clah Documentation
+site_author: Simone Esposito
 site_url: https://github.com/esposimo/clah
 repo_url: https://github.com/esposimo/clah
+repo_name: esposimo/clah
 site_description: Official Clah Documentation
-
-nav:
-  - Home: index.md
-  - Install:
-    - Requirements: ./install/requirements.md
-    - Getting Started!: ./install/getting-started.md
-    - Service Config: ./install/sc-install.md
-    - Network: ./install/network.md
-    - Vault: ./install/vault.md
-  - Service Config:
-    - Put and Get information: ./service-config/put-get-sc.md
-    - Infrastructure path: ./service-config/infra-path-sc.md
-  - Manage Secrets:
-    - How to use SOPS: ./vault/how-use-sops.md
-    - Works with KV: ./vault/create-kv.md
-  - Platforms:
-    - Terraform: ./platforms/terraform.md
-    - Docker: ./platforms/docker.md
-    - SOPS: ./platforms/sops.md
-  - CLAH cli:
-    - Usage: ./cli/clah-command.md
-    - sc: ./cli/cli-sc.md
-    - sops: ./cli/cli-sops.md
-  - About: about.md
+copyright: 'Copyright &copy; 2025 Simone Esposito'
 
 theme:
-  features:
-    - navigation.tabs
-    - navigation.path
   name: material
   features:
+    - toc.integrate
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.top
     - content.code.copy
     - content.code.select
     - content.code.annotate
@@ -51,6 +31,8 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to system preference
+
+
 markdown_extensions:
   - pymdownx.highlight:
       anchor_linenums: true
@@ -61,9 +43,57 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.details
   - admonition
+  - toc:
+      permalink: true
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Install:
+    - Requirements: ./install/requirements.md
+    - Ready to Use: ./install/getting-started.md
+    - Step by step:
+      - Service Config: ./install/sc-install.md
+      - Network: ./install/network.md
+      - Vault: ./install/vault.md
+  - Services:
+    - Home: ./services/index.md
+    - Services Config:
+      - Put and Get information: ./services/service-config/put-get-sc.md
+      - Infrastructure path: ./services/service-config/infra-path-sc.md
+    - Manage Secrets:
+      - How to use SOPS: ./services/vault/how-use-sops.md
+      - Works with KV: ./services/vault/create-kv.md
+  - Platforms:
+      - Terraform: ./platforms/terraform.md
+      - Docker: ./platforms/docker.md
+      - SOPS: ./platforms/sops.md
+  - CLAH cli:
+    - Usage: ./cli/clah-command.md
+    - config: ./cli/clah-config.md
+    - destroy: ./cli/clah-destroy.md
+    - init: ./cli/clah-init.md
+    - sc: ./cli/clah-sc.md
+    - sops: ./cli/clah-sops.md
+    - users: ./cli/clah-users.md
+    - vault: ./cli/clah-vault.md
+  - About: about.md
+
+  #config   destroy  elastic  init     sc       sops     users    vault
 
 plugins:
 - search
 - mkdocstrings
+- social
 - open-in-new-tab:
     add_icon: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/esposimo/clah
+    - icon: fontawesome/brands/facebook
+      link: https://www.facebook.com/SeiIlTopDeiTopTopper
+    - icon: fontawesome/brands/instagram
+      link: https://www.instagram.com/simonello86/

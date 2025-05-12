@@ -5,8 +5,7 @@
 To initialize the Vault used by CLAH, simply run the script located at:
 
 ```bash title="bash"
-cd $CLAH_HOME/infrastructure/vault
-apply.sh
+clah init vault
 ```
 
 This script performs the full initialization of the Vault service using the default configuration provided in the [variables.tfvars](https://github.com/esposimo/clah/blob/main/infrastructure/vault/config/variables.tfvars) file. No manual steps are required.

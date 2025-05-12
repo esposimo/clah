@@ -7,8 +7,7 @@ The first Terraform-based step in the CLAH initialization process is the creatio
 To create the network, run the following script:
 
 ```bash title="bash"
-$ cd $CLAH_HOME/infrastructure/network
-$ apply.sh
+$ clah init network
 ```
 This script will use predefined configuration values from the file [variables.tfvars](https://github.com/esposimo/clah/blob/main/infrastructure/network/config/variables.tfvars) in `$CLAH_HOME/infrastructure/network/config`
 
