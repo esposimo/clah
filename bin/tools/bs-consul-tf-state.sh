@@ -9,7 +9,7 @@ BOLD="\033[1m"
 
 usage()
 {
-  printf "\nUsage: clah sc <init|destroy>\n\n"
+  printf "\nUsage: clah init|destroy sc\n\n"
 }
 
 error_msg()
@@ -40,7 +40,7 @@ create_service_config()
 {
   printf "Creating volume ${SC_VOLUME_NAME}"
   docker volume create ${SC_VOLUME_NAME} || { error_msg "Volume creation failed" ; exit 1; };
-  docker build -f ./service-config-build/Dockerfile -t ${SC_CONTAINER_IMAGE} ./service-config-build || { error_msg "Image build failed" ; exit 1; }
+  docker build -f ${CLAH_BIN}/tools/service-config-build/Dockerfile -t ${SC_CONTAINER_IMAGE} ${CLAH_BIN}/tools/service-config-build || { error_msg "Image build failed" ; exit 1; }
 
   docker run -d \
     --name=${SC_CONTAINER_NAME} \
