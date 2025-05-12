@@ -19,7 +19,7 @@ The Consul container provides a central registry to:
 Run the following command:
 
 ```bash title="bash"
-$ clah sc init
+$ clah init sc
 ```
 
 This command will:
@@ -57,7 +57,7 @@ You can override these by exporting them in your shell before launching the scri
 ```bash title="bash"
 export SC_HOST_PORT=15100
 export SC_CONTAINER_NAME=my-consul
-clah sc init
+clah init sc
 ```
 
 !!! warning
