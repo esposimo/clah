@@ -35,6 +35,7 @@ jobs:
           pip install mkdocs-glightbox
           pip install mkdocstrings[python]
           pip install mkdocs-open-in-new-tab
+          pip install mkdocs-social
           pip install Pygments
       - name: Build and deploy with MkDocs
         run: mkdocs build -f docs/mkdocs.yml --verbose
