@@ -17,6 +17,21 @@ if [[ -z $1 ]] ; then
 	exit;
 fi;
 
+init_all()
+{
+    printf "Install Service Config container "
+    $CLAH_BIN/tools/bs-consul-tf-state.sh init >/dev/null 2>/dev/null || { printf "ERROR\n"; exit 1; };
+    printf "\n";
+    cd $CLAH_HOME/infrastructure/network/
+    printf "Creating infrastructure network ";
+    bash apply.sh -y >/dev/null || { printf "ERROR\n"; exit 1; };
+    cd $CLAH_HOME/infrastructure/vault/
+    printf "\n";
+    printf "Create vault service ";
+    bash apply.sh -y >/dev/null || { printf "ERROR\n"; exit 1; };
+    printf "\n";
+}
+
 COMMAND=$1
 
 case "$COMMAND" in
