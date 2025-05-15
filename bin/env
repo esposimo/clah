@@ -1,24 +1,34 @@
 
 
-CLAH_SC_ENDPOINT="http://127.0.0.1:15080"
+CLAH_SC_ENDPOINT="${CLAH_SC_ENDPOINT:=http://127.0.0.1:15080}"
 
 if [[ -z "${CLAH_SC_ENDPOINT}" ]] ; then
     printf "Variabile CLAH_SC_ENDPOINT non settata\n";
     exit 1;
 fi;
 
+if [[ -z "${CLAH_DATA}" ]] ; then
+    printf "Variabile CLAH_DATA non settata\n";
+    exit 1;
+fi;
+
 source $CLAH_BIN/tools/utils.sh
 
+export CLAH_DOCKER_HOST_IP=$(get_sc_curl "infrastructure/network/docker-host-ip")
+export CLAH_DOCKER_NETWORK_NAME=$(get_sc_curl "infrastructure/network/name")
+export CLAH_DOCKER_NETWORK_GATEWAY=$(get_sc_curl "infrastructure/network/gateway")
+export CLAH_DOCKER_NETWORK_SUBNET=$(get_sc_curl "infrastructure/network/subnet")
 
-CLAH_DOCKER_HOST_IP=$(get_sc_curl "infrastructure/network/docker-host-ip")
-CLAH_DOCKER_NETWORK_NAME=$(get_sc_curl "infrastructure/network/name")
-CLAH_DOCKER_NETWORK_GATEWAY=$(get_sc_curl "infrastructure/network/gateway")
-CLAH_DOCKER_NETWORK_SUBNET=$(get_sc_curl "infrastructure/network/subnet")
+export CLAH_SC_CONTAINER_NAME=$(get_sc_curl "infrastructure/consul-tf-service/container/name")
+export CLAH_SC_CONTAINER_IMAGE=$(get_sc_curl "infrastructure/consul-tf-service/container/image")
+export CLAH_SC_VOLUME_NAME=$(get_sc_curl "infrastructure/consul-tf-service/container/volume-data")
+export CLAH_SC_CONTAINER_PORT=$(get_sc_curl "infrastructure/consul-tf-service/container/port")
 
-CLAH_SC_CONTAINER_NAME=$(get_sc_curl "infrastructure/consul-tf-service/container/name")
-CLAH_SC_CONTAINER_IMAGE=$(get_sc_curl "infrastructure/consul-tf-service/container/image")
-CLAH_SC_VOLUME_NAME=$(get_sc_curl "infrastructure/consul-tf-service/container/volume-data")
-CLAH_SC_CONTAINER_PORT=$(get_sc_curl "infrastructure/consul-tf-service/container/port")
+
+export CLAH_ELASTIC_MASTER=${CLAH_DATA}/elastic/master
+export CLAH_ELASTIC_COLD=${CLAH_DATA}/elastic/cold
+
+source ${CLAH_BIN}/override-env
 
 
 

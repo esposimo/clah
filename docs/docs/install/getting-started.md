@@ -15,6 +15,7 @@ Modify your `~/.bashrc` (or equivalent shell config file, e.g., `~/.zshrc`) to s
 # add environment variable
 export CLAH_HOME="<project-dir>"
 export CLAH_BIN="${CLAH_HOME}/bin"
+export CLAH_DATA="<project-data>"
 
 if [[ -f "${CLAH_BIN}/load_env.sh" ]]; then
     source "${CLAH_BIN}/load_env.sh"

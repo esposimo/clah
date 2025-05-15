@@ -29,7 +29,7 @@ if [[ -z $1 ]] ; then
 fi;
 
 DOCKER_HOST_IP=$(ip route get 8.8.8.8 | grep -oP 'src \K\S+')
-SC_BASE_IMAGE="${SC_BASE_IMAGE:=hashicorp/consul:1.20}"
+SC_BASE_IMAGE=""${SC_BASE_IMAGE:=hashicorp/consul:1.20}
 SC_CONTAINER_NAME="${SC_CONTAINER_NAME:=service-config-container}"
 SC_CONTAINER_IMAGE="${SC_CONTAINER_IMAGE:=service-config-image}"
 SC_VOLUME_NAME="${SC_VOLUME_NAME=service-config-volume}"
