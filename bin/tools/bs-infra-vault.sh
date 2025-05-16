@@ -22,11 +22,11 @@ COMMAND=$1
 case "$COMMAND" in
     init)
         cd $CLAH_HOME/infrastructure/vault/
-        sh apply.sh "$@"
+        $CLAH_BIN/tools/tf.sh apply
         ;;
     destroy)
         cd $CLAH_HOME/infrastructure/vault/
-        sh destroy.sh "$@"
+        $CLAH_BIN/tools/tf.sh destroy
         ;;
     help|-h|--help)
         usage;

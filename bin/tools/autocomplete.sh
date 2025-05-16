@@ -7,6 +7,9 @@ _clah_complete()
     _init_completion || return
 
     case "${words[1]}" in
+        tf)
+            COMPREPLY=( $(compgen -W "apply destroy" -- "$cur") )
+            ;;
         config)
             COMPREPLY=( $(compgen -W "get put ls rm lget help" -- "$cur") )
             ;;
@@ -20,7 +23,7 @@ _clah_complete()
             COMPREPLY=( $(compgen -W "encrypt decrypt new edit" -- "$cur") )
             ;;
         *)
-            COMPREPLY=( $(compgen -W "sops elastic vault users sc config init destroy" -- "$cur") )
+            COMPREPLY=( $(compgen -W "sops elastic vault users sc config init destroy tf" -- "$cur") )
             ;;
     esac
 }

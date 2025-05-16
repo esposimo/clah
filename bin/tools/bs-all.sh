@@ -38,15 +38,15 @@ case "$COMMAND" in
     init)
         $CLAH_BIN/tools/bs-consul-tf-state.sh $COMMAND
         cd $CLAH_HOME/infrastructure/network/
-        bash apply.sh -y
+        $CLAH_BIN/tools/tf.sh apply -y
         cd $CLAH_HOME/infrastructure/vault/
-        bash apply.sh -y
+        $CLAH_BIN/tools/tf.sh apply -y
         ;;
     destroy)
         cd $CLAH_HOME/infrastructure/vault/
-        bash destroy.sh -y
+        $CLAH_BIN/tools/tf.sh destroy -y
         cd $CLAH_HOME/infrastructure/network/
-        bash destroy.sh -y
+        $CLAH_BIN/tools/tf.sh destroy -y
         $CLAH_BIN/tools/bs-consul-tf-state.sh $COMMAND
         ;;
     help|-h|--help)

@@ -69,15 +69,20 @@ nav:
       - Terraform: ./platforms/terraform.md
       - Docker: ./platforms/docker.md
       - SOPS: ./platforms/sops.md
-  - CLAH cli:
-    - Usage: ./cli/clah-command.md
-    - config: ./cli/clah-config.md
-    - destroy: ./cli/clah-destroy.md
-    - init: ./cli/clah-init.md
-    - sc: ./cli/clah-sc.md
-    - sops: ./cli/clah-sops.md
-    - users: ./cli/clah-users.md
-    - vault: ./cli/clah-vault.md
+  - Command Line:
+    - clah:
+      - Usage: ./cli/clah-command.md
+      - config: ./cli/clah-config.md
+      - destroy: ./cli/clah-destroy.md
+      - init: ./cli/clah-init.md
+      - tf: ./cli/clah-tf.md
+      - sc: ./cli/clah-sc.md
+      - sops: ./cli/clah-sops.md
+      - users: ./cli/clah-users.md
+      - vault: ./cli/clah-vault.md
+    - misc:
+      - Get Docker Host: ./cli/get-docker-host.md
+      - Generate Password: ./cli/generate-password.md
   - About: about.md
 
   #config   destroy  elastic  init     sc       sops     users    vault
