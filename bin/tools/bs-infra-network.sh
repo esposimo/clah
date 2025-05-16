@@ -21,11 +21,11 @@ COMMAND=$1
 case "$COMMAND" in
     init)
         cd $CLAH_HOME/infrastructure/network/
-        sh apply.sh "$@"
+        $CLAH_BIN/tools/tf.sh apply
         ;;
     destroy)
         cd $CLAH_HOME/infrastructure/network/
-        sh destroy.sh "$@"
+        $CLAH_BIN/tools/tf.sh destroy
         ;;
     help|-h|--help)
         if [[ -z $1 ]] ; then

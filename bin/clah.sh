@@ -10,7 +10,8 @@ usage()
     printf "Usage:\n  clah <command> <options>\n\n";
     printf "Cloud at Home - Manage your local cloud infrastracture components\n\n";
     printf "Available Commands:\n"
-    printf "  config\t\tManage information on Service Config\n";
+    printf "  tf\t\tApply or destroy terraform project\n";
+    printf "  config\tManage information on Service Config\n";
     printf "  init\t\tInitialize Service for Clah\n";
     printf "  sops\t\tManage secrets using SOPS\n";
     printf "  vault\t\tInteract with HashiCorp Vault\n"
@@ -36,6 +37,9 @@ show_version()
 }
 
 case "$COMMAND" in
+    tf)
+        $CLAH_BIN/tools/tf.sh "$@"
+        ;;
     config)
         $CLAH_BIN/tools/sc.sh "$@"
         ;;
@@ -55,6 +59,10 @@ case "$COMMAND" in
         fi;
         if [[ "$1" == "sops" ]] ; then
             $CLAH_BIN/tools/sops.sh help;
+            exit;
+        fi;
+        if [[ "$1" == "tf" ]] ; then
+            $CLAH_BIN/tools/tf.sh help;
             exit;
         fi;
         usage;

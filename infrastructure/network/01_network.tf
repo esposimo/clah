@@ -12,7 +12,7 @@ resource "docker_network" "infrastructure_network" {
 }
 
 data "external" "docker_host_ip" {
-  program = ["${path.cwd}/get_docker_ip.sh"]
+  program = ["${path.cwd}/../../bin/get_docker_ip.sh"]
 }
 
 resource "consul_keys" "infrastructure_network_info" {
