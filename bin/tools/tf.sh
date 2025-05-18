@@ -26,6 +26,7 @@ usage()
     printf "Use \"clah help <command>\" for more information about a command\n";
 }
 
+env | grep CLAH
 
 if [[ -z $1 ]] ; then
     usage;
@@ -39,21 +40,21 @@ fi;
 
 if [[ "$1" == "apply" ]] ; then
     if [[ "$2" == "-y" ]] ; then
-        terraform init -reconfigure -backend-config="./config/backend.tfvars"
-        terraform apply -auto-approve -var-file="./config/variables.tfvars" 
+        terraform init -reconfigure -backend-config="address=127.0.0.1:${CLAH_SC_HOST_PORT}" -backend-config="./config/backend.tfvars"
+        terraform apply -auto-approve -var-file="./config/variables.tfvars" -var="SC_ENDPOINT=127.0.0.1:${CLAH_SC_HOST_PORT}"
     else
-        terraform init -reconfigure -backend-config="./config/backend.tfvars"
-        terraform apply -var-file="./config/variables.tfvars"
+        terraform init -reconfigure -backend-config="address=127.0.0.1:${CLAH_SC_HOST_PORT}" -backend-config="./config/backend.tfvars"
+        terraform apply -var-file="./config/variables.tfvars" -var="SC_ENDPOINT=127.0.0.1:${CLAH_SC_HOST_PORT}"
     fi;
 fi;
 
 if [[ "$1" == "destroy" ]] ; then
     if [[ "$2" == "-y" ]] ; then
-        terraform init -reconfigure -backend-config="./config/backend.tfvars"
-        terraform destroy -auto-approve -var-file="./config/variables.tfvars" 
+        terraform init -reconfigure -backend-config="address=127.0.0.1:${CLAH_SC_HOST_PORT}" -backend-config="./config/backend.tfvars"
+        terraform destroy -auto-approve -var-file="./config/variables.tfvars" -var="SC_ENDPOINT=127.0.0.1:${CLAH_SC_HOST_PORT}"
     else
-        terraform init -reconfigure -backend-config="./config/backend.tfvars"
-        terraform destroy -var-file="./config/variables.tfvars"
+        terraform init -reconfigure -backend-config="address=127.0.0.1:${CLAH_SC_HOST_PORT}" -backend-config="./config/backend.tfvars"
+        terraform destroy -var-file="./config/variables.tfvars" -var="SC_ENDPOINT=127.0.0.1:${CLAH_SC_HOST_PORT}"
     fi;
 fi;
 

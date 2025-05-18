@@ -1,14 +1,14 @@
 
 
-CLAH_SC_ENDPOINT="${CLAH_SC_ENDPOINT:=http://127.0.0.1:15080}"
+CLAH_SC_ENDPOINT="${CLAH_SC_ENDPOINT:=http://127.0.0.1:${CLAH_SC_HOST_PORT}}"
 
 if [[ -z "${CLAH_SC_ENDPOINT}" ]] ; then
-    printf "Variabile CLAH_SC_ENDPOINT non settata\n";
+    printf "Error: CLAH_SC_ENDPOINT is not set\n";
     exit 1;
 fi;
 
 if [[ -z "${CLAH_DATA}" ]] ; then
-    printf "Variabile CLAH_DATA non settata\n";
+    printf "Error: CLAH_DATA is not set\n";
     exit 1;
 fi;
 
@@ -18,7 +18,7 @@ export CLAH_DOCKER_HOST_IP=$(get_sc_curl "infrastructure/network/docker-host-ip"
 export CLAH_DOCKER_NETWORK_NAME=$(get_sc_curl "infrastructure/network/name")
 export CLAH_DOCKER_NETWORK_GATEWAY=$(get_sc_curl "infrastructure/network/gateway")
 export CLAH_DOCKER_NETWORK_SUBNET=$(get_sc_curl "infrastructure/network/subnet")
-
+#
 export CLAH_SC_CONTAINER_NAME=$(get_sc_curl "infrastructure/consul-tf-service/container/name")
 export CLAH_SC_CONTAINER_IMAGE=$(get_sc_curl "infrastructure/consul-tf-service/container/image")
 export CLAH_SC_VOLUME_NAME=$(get_sc_curl "infrastructure/consul-tf-service/container/volume-data")

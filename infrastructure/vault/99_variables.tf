@@ -1,3 +1,7 @@
+variable "SC_ENDPOINT" {
+    type = string
+    description = "Env variable for Service Config Endpoint"
+}
 # network
 
 variable "storage-engine-address-v4" {

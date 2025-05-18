@@ -15,6 +15,7 @@ Modify your `~/.bashrc` (or equivalent shell config file, e.g., `~/.zshrc`) to s
 # add environment variable
 export CLAH_HOME="<project-dir>"
 export CLAH_BIN="${CLAH_HOME}/bin"
+export CLAH_SC_PORT="15080"
 export CLAH_DATA="<project-data>"
 
 if [[ -f "${CLAH_BIN}/load_env.sh" ]]; then
@@ -23,6 +24,11 @@ fi
 ```
 Replace <project-dir> with the path where you cloned the repository.
 This configuration will allow you to use the clah command from any terminal session.
+
+!!! info
+    You can change the `CLAH_SC_HOST_PORT` variable to initialize the Service Config on a port other than `15080`. This won't affect any of the CLAH Terraform projects.
+    Since **CLAH** runs only with Docker in single-node mode, the Terraform projects will always use `127.0.0.1:CLAH_SC_HOST_PORT` as the endpoint.
+
 
 ## Reload Your Shell Environment
 

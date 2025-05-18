@@ -17,6 +17,6 @@ provider "docker" {
 }
 
 provider "consul" {
-  address    = "127.0.0.1:15080"
+  address    = var.SC_ENDPOINT
   datacenter = "hsh-dc"
 }

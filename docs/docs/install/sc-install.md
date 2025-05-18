@@ -25,43 +25,43 @@ $ clah init sc
 This command will:
 
 - Build and start a Consul Docker container.
-- Expose it on port 15080 of the host machine.
+- Expose it on port `CLAH_SC_HOST_PORT` of the host machine.
 - Create a Docker volume for persistent data storage.
 - Skip any security configuration to keep the setup simple for development.
 
 Once started, you can access the HTTP web console at:
 
 ```bash title="bash"
-$ http://<docker-host>:15080
+$ http://<docker-host>:<CLAH_SC_HOST_PORT>
 ```
 
 and HTTP API at:
 ```bash title="bash"
-$ http://<docker-host>:15080/v1/kv
+$ http://<docker-host>:<CLAH_SC_HOST_PORT>/v1/kv
 ```
 
 ## Configuration Variables
 
 The script supports several environment variables to customize the container configuration. If not set, default values will be used:
 
-| Variable             | Description                               | Default Value                  |
-|----------------------|-------------------------------------------|--------------------------------|
-| `SC_BASE_IMAGE`      | Docker image to use for Consul            | `hashicorp/consul:1.20`        |
-| `SC_CONTAINER_NAME`  | Name of the container                     | `service-config-container`     |
-| `SC_CONTAINER_IMAGE` | Name of the image to build                | `service-config-image`         |
-| `SC_VOLUME_NAME`     | Docker volume name for Consul data        | `service-config-volume`        |
-| `SC_HOST_PORT`       | Host port to access Consul                | `15080`                        |
+| Variable                  | Description                               | Default Value                  |
+|---------------------------|-------------------------------------------|--------------------------------|
+| `CLAH_SC_BASE_IMAGE`      | Docker image to use for Consul            | `hashicorp/consul:1.20`        |
+| `CLAH_SC_CONTAINER_NAME`  | Name of the container                     | `service-config-container`     |
+| `CLAH_SC_CONTAINER_IMAGE` | Name of the image to build                | `service-config-image`         |
+| `CLAH_SC_VOLUME_NAME`     | Docker volume name for Consul data        | `service-config-volume`        |
+| `CLAH_SC_HOST_PORT`       | Host port to access Consul                | `15080`                        |
 
 You can override these by exporting them in your shell before launching the script:
 
 ```bash title="bash"
-export SC_HOST_PORT=15100
-export SC_CONTAINER_NAME=my-consul
+export CLAH_SC_HOST_PORT=15100
+export CLAH_SC_CONTAINER_NAME=my-consul
 clah init sc
 ```
 
 !!! warning
-    If you change the default port of the Service Config service, you will need to update the `backend.tfvars` file in the Terraform projects under `infrastructure/`
+    If you want to use a different port for the service config, it's recommended to set the `CLAH_SC_HOST_PORT` variable in your `.bashrc`. Exporting it only in the current Bash session may lead to issues when opening new SSH sessions.
 
 ## Security Considerations
 
