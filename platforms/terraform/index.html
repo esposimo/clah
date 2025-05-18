@@ -1,0 +1,2085 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Official Clah Documentation">
+      
+      
+        <meta name="author" content="Simone Esposito">
+      
+      
+        <link rel="canonical" href="https://github.com/esposimo/clah/platforms/terraform/">
+      
+      
+        <link rel="prev" href="../../services/vault/create-kv/">
+      
+      
+        <link rel="next" href="../docker/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Terraform - Clah Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../../css/open_in_new_tab.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-5RKPHJY8WQ"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-5RKPHJY8WQ",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-5RKPHJY8WQ",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="orange">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#why-terraform" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow md-header--lifted" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Clah Documentation" class="md-header__button md-logo" aria-label="Clah Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Clah Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Terraform
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="green" data-md-color-accent="orange"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="green" data-md-color-accent="orange"  aria-label="Switch to system preference"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to system preference" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/esposimo/clah" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    esposimo/clah
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+    
+      
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../install/requirements/" class="md-tabs__link">
+          
+  
+  
+  Install
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../services/" class="md-tabs__link">
+          
+  
+  
+  Services
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Platforms
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../cli/clah-command/" class="md-tabs__link">
+          
+  
+  
+  Command Line
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../about/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  About
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+    
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Clah Documentation" class="md-nav__button md-logo" aria-label="Clah Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Clah Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/esposimo/clah" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81"/></svg>
+  </div>
+  <div class="md-source__repository">
+    esposimo/clah
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Install
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Install
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/requirements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Requirements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/getting-started/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Ready to Use
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Step by step
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Step by step
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/sc-install/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Service Config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/network/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Network
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../install/vault/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Vault
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Services
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Services
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Services Config
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Services Config
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/service-config/put-get-sc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Put and Get information
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/service-config/infra-path-sc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Infrastructure path
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Manage Secrets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Manage Secrets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/vault/how-use-sops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    How to use SOPS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../services/vault/create-kv/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Works with KV
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Platforms
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Platforms
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Terraform
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Terraform
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Introduction
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#why-terraform_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why Terraform?
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maturity-and-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Maturity and Ecosystem
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Maturity and Ecosystem">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stability-and-community-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stability and Community Support
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provider-ecosystem" class="md-nav__link">
+    <span class="md-ellipsis">
+      Provider Ecosystem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#module-registry" class="md-nav__link">
+    <span class="md-ellipsis">
+      Module Registry
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#declarative-approach" class="md-nav__link">
+    <span class="md-ellipsis">
+      Declarative Approach
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Declarative Approach">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#benefits-of-declarative-iaac-in-clah" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits of Declarative IaAC in CLAH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-to-service-composition" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application to Service Composition
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multi-provider-support" class="md-nav__link">
+    <span class="md-ellipsis">
+      Multi-Provider Support
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Multi-Provider Support">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#unified-control-plane" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unified Control Plane
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cloud-and-on-prem-readiness" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cloud and On-Prem Readiness
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#real-world-example-in-clah" class="md-nav__link">
+    <span class="md-ellipsis">
+      Real-World Example in CLAH
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#state-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      State Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="State Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#why-state-matters-in-clah" class="md-nav__link">
+    <span class="md-ellipsis">
+      Why State Matters in CLAH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#remote-state-and-collaboration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Remote State and Collaboration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#security-of-state" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security of State
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modularity-and-reusability" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modularity and Reusability
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Modularity and Reusability">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#modular-design-in-clah" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modular Design in CLAH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-a-logging-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example: A Logging Module
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#long-term-benefits" class="md-nav__link">
+    <span class="md-ellipsis">
+      Long-Term Benefits
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#security-and-secrets-handling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Security and Secrets Handling
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Security and Secrets Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vault-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Vault Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sensitive-data-handling-in-terraform" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sensitive Data Handling in Terraform
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#secure-state-storage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Secure State Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#benefits-for-clah-security-posture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Benefits for CLAH Security Posture
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#limitations-and-mitigations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations and Mitigations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Limitations and Mitigations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#limitations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limitations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mitigations-in-clah" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mitigations in CLAH
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conclusion
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Docker
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SOPS
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Command Line
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Command Line
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    clah
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            clah
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-command/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Usage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-config/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    config
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-destroy/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    destroy
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-init/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    init
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-tf/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    tf
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-sc/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sc
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-sops/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    sops
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-users/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    users
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/clah-vault/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    vault
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    misc
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            misc
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/get-docker-host/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Get Docker Host
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../cli/generate-password/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Generate Password
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../about/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    About
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="why-terraform">Why Terraform<a class="headerlink" href="#why-terraform" title="Permanent link">&para;</a></h1>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>The <strong>CLAH</strong> project (Cloud Local Application Hub) is designed to offer a robust and modular application stack tailored for self-hosted environments. One of its key design principles is the definition of <strong>infrastructure as application code (IaAC)</strong> — a step beyond traditional Infrastructure as Code (IaC). This paradigm treats not only compute and network layers as code, but also the configuration, dependencies, and logical composition of the services as part of the same automated definition.</p>
+<p>In this context, choosing the right platform to express and manage this infrastructure is critical. The CLAH stack is based on containers, service discovery, secrets management, monitoring, and custom logic orchestration — all requiring a high degree of automation, reusability, and reliability.</p>
+<p>After evaluating several tools and frameworks, we chose <strong>Terraform</strong> as the foundation for CLAH’s IaAC implementation. This documentation outlines the rationale behind this decision and why Terraform stands out as the most effective choice for our architecture.</p>
+<h2 id="why-terraform_1">Why Terraform?<a class="headerlink" href="#why-terraform_1" title="Permanent link">&para;</a></h2>
+<p>Terraform was selected as the core platform for CLAH’s Infrastructure as Application Code (IaAC) due to its unique combination of stability, flexibility, and extensibility. While many tools exist for provisioning infrastructure or managing configuration, Terraform provides a unified language and workflow to define and manage the full lifecycle of infrastructure resources — from bare metal and cloud services to container platforms and secrets managers.</p>
+<p>Key reasons behind this choice include:</p>
+<ul>
+<li><strong>Consistency</strong>: Terraform enables reproducible environments through declarative configuration and state tracking.</li>
+<li><strong>Ecosystem</strong>: The wide range of official and community providers allows integration with Docker, Consul, Vault, DNS servers, cloud APIs, and more — all from a single control plane.</li>
+<li><strong>Modularity</strong>: Native support for modules encourages clean separation of concerns and reusability across environments.</li>
+<li><strong>Visibility and Control</strong>: Terraform’s plan-and-apply cycle makes every infrastructure change explicit and auditable.</li>
+<li><strong>Cloud-Agnostic Logic</strong>: CLAH is designed to run on local hardware but could be ported to the cloud. Terraform supports both without changing the core logic.</li>
+</ul>
+<p>Terraform is not just a provisioning tool in CLAH — it is the infrastructure definition layer that bridges configuration, deployment, and service composition. The following sections break down the specific reasons why it outperforms other alternatives for this purpose.</p>
+<h2 id="maturity-and-ecosystem">Maturity and Ecosystem<a class="headerlink" href="#maturity-and-ecosystem" title="Permanent link">&para;</a></h2>
+<p>Terraform is a mature and battle-tested tool developed by HashiCorp and widely adopted across industries. Since its initial release in 2014, it has evolved into one of the most stable and actively maintained infrastructure automation tools available.</p>
+<h3 id="stability-and-community-support">Stability and Community Support<a class="headerlink" href="#stability-and-community-support" title="Permanent link">&para;</a></h3>
+<p>Terraform’s maturity is reflected in its:</p>
+<ul>
+<li>Long-term versioning and upgrade policies</li>
+<li>Extensive documentation and tutorials</li>
+<li>Backed support by HashiCorp and an active open-source community</li>
+</ul>
+<p>For a project like CLAH, which aims to be sustainable and maintainable over time, relying on a proven and well-documented platform is crucial.</p>
+<h3 id="provider-ecosystem">Provider Ecosystem<a class="headerlink" href="#provider-ecosystem" title="Permanent link">&para;</a></h3>
+<p>A core strength of Terraform is its <strong>provider ecosystem</strong>, which supports a vast number of platforms and technologies, including:</p>
+<ul>
+<li><strong>Docker</strong>: for container orchestration</li>
+<li><strong>Vault</strong>: for secrets and identity management</li>
+<li><strong>Consul</strong>: for service discovery</li>
+<li><strong>Local and remote DNS</strong>: including BIND, CoreDNS, Cloudflare, etc.</li>
+<li><strong>Filesystems and local exec</strong>: for executing configuration scripts</li>
+<li><strong>Cloud services</strong>: should future migration or hybrid setups be required</li>
+</ul>
+<p>This extensibility allows CLAH to unify infrastructure provisioning across heterogeneous components using a single, declarative language.</p>
+<h3 id="module-registry">Module Registry<a class="headerlink" href="#module-registry" title="Permanent link">&para;</a></h3>
+<p>Terraform also offers a <strong>centralized module registry</strong> and supports private registries, which helps in sharing and reusing modules — ideal for separating logical units such as logging, networking, security policies, and application stacks.</p>
+<p>In short, Terraform’s maturity and rich ecosystem make it a stable foundation for building and evolving the CLAH platform.</p>
+<h2 id="declarative-approach">Declarative Approach<a class="headerlink" href="#declarative-approach" title="Permanent link">&para;</a></h2>
+<p>Terraform uses a <strong>declarative configuration language (HCL)</strong>, which allows the desired state of the infrastructure to be described in a concise and human-readable way. Rather than writing procedural instructions on how to reach that state, users define <strong>what</strong> the infrastructure should look like — and Terraform figures out <strong>how</strong> to make it happen.</p>
+<h3 id="benefits-of-declarative-iaac-in-clah">Benefits of Declarative IaAC in CLAH<a class="headerlink" href="#benefits-of-declarative-iaac-in-clah" title="Permanent link">&para;</a></h3>
+<p>For the CLAH project, the declarative approach brings several advantages:</p>
+<ul>
+<li><strong>Clarity and Maintainability</strong>: The code describes the final infrastructure state, making it easier to understand and review.</li>
+<li><strong>Idempotence</strong>: Applying the same configuration multiple times yields the same result — critical for repeatable deployments.</li>
+<li><strong>Safe Change Management</strong>: Terraform's <code>plan</code> phase clearly shows the delta between current and target state, preventing unexpected changes.</li>
+<li><strong>Auditability</strong>: Version-controlled configuration files offer a full history of changes to infrastructure definitions.</li>
+<li><strong>Diff Awareness</strong>: The plan engine detects even subtle differences (e.g., IP change, secret rotation) and surfaces them clearly.</li>
+</ul>
+<h3 id="application-to-service-composition">Application to Service Composition<a class="headerlink" href="#application-to-service-composition" title="Permanent link">&para;</a></h3>
+<p>In CLAH, declarative syntax helps express how components relate to each other:</p>
+<ul>
+<li>Service dependencies (e.g., “Home Assistant requires MQTT and Vault”)</li>
+<li>Networking logic (e.g., “Expose this stack only via reverse proxy”)</li>
+<li>Resource constraints (e.g., “Use a private Docker network with reserved IPs”)</li>
+</ul>
+<p>This results in infrastructure that behaves like <strong>composable building blocks</strong>, defined once and deployed many times, across dev, staging, and production environments.</p>
+<p>Terraform's declarative model is essential for achieving <strong>predictable, repeatable, and explainable deployments</strong> in the CLAH architecture.</p>
+<h2 id="multi-provider-support">Multi-Provider Support<a class="headerlink" href="#multi-provider-support" title="Permanent link">&para;</a></h2>
+<p>One of Terraform’s most powerful features is its ability to interact with multiple providers simultaneously, enabling orchestration across diverse systems and APIs. For the CLAH project — which integrates local containers, DNS, secrets, proxies, and monitoring — this flexibility is essential.</p>
+<h3 id="unified-control-plane">Unified Control Plane<a class="headerlink" href="#unified-control-plane" title="Permanent link">&para;</a></h3>
+<p>Terraform allows CLAH to manage different parts of the infrastructure using a <strong>single language and workflow</strong>, including:</p>
+<ul>
+<li><strong>Docker provider</strong>: for container networks, volumes, images, and services.</li>
+<li><strong>Vault provider</strong>: for secrets injection, PKI automation, and dynamic credentials.</li>
+<li><strong>Local and external DNS providers</strong>: for configuring internal name resolution and dynamic record updates.</li>
+<li><strong>Filesystem and exec providers</strong>: for triggering scripts and custom logic where needed.</li>
+<li><strong>Consul provider</strong>: for registering and discovering services dynamically.</li>
+</ul>
+<p>All providers are configured independently but orchestrated together in a single execution plan. This abstraction reduces the need for ad-hoc scripts or glue code.</p>
+<h3 id="cloud-and-on-prem-readiness">Cloud and On-Prem Readiness<a class="headerlink" href="#cloud-and-on-prem-readiness" title="Permanent link">&para;</a></h3>
+<p>While CLAH is designed to run on self-hosted infrastructure, the use of Terraform ensures portability:</p>
+<ul>
+<li>Infrastructure can be easily extended to support hybrid setups (e.g., using AWS, GCP, or Azure providers).</li>
+<li>Terraform modules in CLAH can be reused or adapted for deployments in the cloud, without rewriting core logic.</li>
+</ul>
+<h3 id="real-world-example-in-clah">Real-World Example in CLAH<a class="headerlink" href="#real-world-example-in-clah" title="Permanent link">&para;</a></h3>
+<p>In practice, CLAH provisions Docker containers with predictable IPs, configures Vault policies, registers services in Consul, and updates DNS records — all in a single Terraform run. This seamless integration is only possible because Terraform supports <strong>true multi-provider workflows</strong> natively.</p>
+<p>The ability to connect heterogeneous components declaratively makes Terraform the ideal choice for CLAH's complex and evolving infrastructure needs.</p>
+<h2 id="state-management">State Management<a class="headerlink" href="#state-management" title="Permanent link">&para;</a></h2>
+<p>Terraform maintains a <strong>state file</strong> that represents the current known state of the infrastructure. This file is crucial for enabling Terraform to determine what changes are necessary when applying a configuration — and for ensuring that deployments remain consistent, reliable, and reproducible.</p>
+<h3 id="why-state-matters-in-clah">Why State Matters in CLAH<a class="headerlink" href="#why-state-matters-in-clah" title="Permanent link">&para;</a></h3>
+<p>The CLAH platform is composed of interconnected services: containers, secrets, DNS records, proxy rules, and monitoring agents. Keeping an accurate and up-to-date representation of this infrastructure is critical to avoid drift and unintended side effects.</p>
+<p>Terraform’s state management enables:</p>
+<ul>
+<li><strong>Change Detection</strong>: Terraform compares the desired configuration with the current state and generates a precise execution plan.</li>
+<li><strong>Dependency Tracking</strong>: Resources can be linked logically, so that dependent changes are ordered and applied safely.</li>
+<li><strong>Partial Updates</strong>: Only the parts of the infrastructure that have changed are modified, reducing downtime and risk.</li>
+<li><strong>Safe Rollouts</strong>: With versioned state storage (e.g., in Git or remote backends), it’s possible to track changes and roll back if needed.</li>
+</ul>
+<h3 id="remote-state-and-collaboration">Remote State and Collaboration<a class="headerlink" href="#remote-state-and-collaboration" title="Permanent link">&para;</a></h3>
+<p>Terraform supports <strong>remote state backends</strong> (e.g., local files, S3, Consul, or encrypted Vault storage). In CLAH:</p>
+<ul>
+<li>State is stored locally for isolated, single-node setups.</li>
+<li>Optionally, remote backends can be used to support multi-user environments or automated pipelines.</li>
+</ul>
+<h3 id="security-of-state">Security of State<a class="headerlink" href="#security-of-state" title="Permanent link">&para;</a></h3>
+<p>Because the state may include sensitive data (like IPs, tokens, or internal paths), CLAH uses:</p>
+<ul>
+<li><strong>Encrypted storage</strong></li>
+<li><strong>Versioned backups</strong></li>
+<li><strong>Restricted access policies</strong></li>
+</ul>
+<p>Terraform’s state model provides the backbone for <strong>repeatable and deterministic infrastructure deployments</strong>, which is a cornerstone of the CLAH project.</p>
+<h2 id="modularity-and-reusability">Modularity and Reusability<a class="headerlink" href="#modularity-and-reusability" title="Permanent link">&para;</a></h2>
+<p>Terraform promotes a modular architecture through its built-in support for <strong>modules</strong> — reusable blocks of configuration that encapsulate related resources and expose standardized inputs and outputs. This is a perfect fit for the CLAH project, which is designed around composable, containerized service units.</p>
+<h3 id="modular-design-in-clah">Modular Design in CLAH<a class="headerlink" href="#modular-design-in-clah" title="Permanent link">&para;</a></h3>
+<p>Each key subsystem in CLAH — such as logging, secrets management, monitoring, proxying, or a specific application — is defined as a <strong>Terraform module</strong>, with:</p>
+<ul>
+<li>A clear interface (<code>variables.tf</code>)</li>
+<li>Optional configuration defaults (<code>locals.tf</code>)</li>
+<li>Well-defined outputs (<code>outputs.tf</code>)</li>
+<li>Internal resources grouped logically</li>
+</ul>
+<p>This structure ensures:</p>
+<ul>
+<li><strong>Separation of concerns</strong>: Each module manages one functional area.</li>
+<li><strong>Ease of testing</strong>: Modules can be validated independently.</li>
+<li><strong>Composability</strong>: Modules can be combined in different topologies.</li>
+<li><strong>Scalability</strong>: New features can be introduced without breaking existing modules.</li>
+</ul>
+<h3 id="example-a-logging-module">Example: A Logging Module<a class="headerlink" href="#example-a-logging-module" title="Permanent link">&para;</a></h3>
+<p>The logging stack in CLAH (e.g., Filebeat + Logstash + Elasticsearch) is managed as a module. It:</p>
+<ul>
+<li>Deploys containers on a specific network</li>
+<li>Exposes endpoints through reverse proxy rules</li>
+<li>Registers services in DNS and service discovery</li>
+<li>Outputs metadata for use in monitoring or dependent services</li>
+</ul>
+<p>This module can be reused across environments (development, test, production) with minor configuration changes, reducing duplication and maintenance overhead.</p>
+<h3 id="long-term-benefits">Long-Term Benefits<a class="headerlink" href="#long-term-benefits" title="Permanent link">&para;</a></h3>
+<p>A modular approach enables:</p>
+<ul>
+<li>Faster onboarding for new services</li>
+<li>More predictable upgrades and bug fixes</li>
+<li>Code reuse across projects or even organizations</li>
+</ul>
+<p>Terraform’s native support for modularity makes it ideal for a system like CLAH, which is <strong>built to evolve</strong>.</p>
+<h2 id="security-and-secrets-handling">Security and Secrets Handling<a class="headerlink" href="#security-and-secrets-handling" title="Permanent link">&para;</a></h2>
+<p>Security is a fundamental concern for CLAH, especially given the sensitive nature of credentials, tokens, and configuration data managed within the platform. Terraform’s integration with secret management tools and its careful handling of sensitive data are key reasons for its selection.</p>
+<h3 id="vault-integration">Vault Integration<a class="headerlink" href="#vault-integration" title="Permanent link">&para;</a></h3>
+<p>CLAH leverages <strong>HashiCorp Vault</strong> for dynamic secrets, PKI automation, and secure storage of sensitive information. Terraform provides a first-class <strong>Vault provider</strong> that allows:</p>
+<ul>
+<li>Reading secrets dynamically during provisioning</li>
+<li>Automating the generation and renewal of credentials</li>
+<li>Applying fine-grained access policies</li>
+<li>Avoiding hardcoding secrets in configuration files</li>
+</ul>
+<p>This integration ensures that secrets are never exposed in plaintext and are managed according to security best practices.</p>
+<h3 id="sensitive-data-handling-in-terraform">Sensitive Data Handling in Terraform<a class="headerlink" href="#sensitive-data-handling-in-terraform" title="Permanent link">&para;</a></h3>
+<p>Terraform itself supports marking variables and outputs as <strong>sensitive</strong>, which:</p>
+<ul>
+<li>Prevents secrets from being displayed in CLI output or logs</li>
+<li>Restricts accidental exposure during plan or apply phases</li>
+<li>Encourages secure handling throughout the deployment pipeline</li>
+</ul>
+<h3 id="secure-state-storage">Secure State Storage<a class="headerlink" href="#secure-state-storage" title="Permanent link">&para;</a></h3>
+<p>Since Terraform’s state files may include sensitive information, CLAH applies:</p>
+<ul>
+<li><strong>Encrypted remote state backends</strong> when collaborating</li>
+<li><strong>Strict access controls</strong> on local and remote state storage</li>
+<li><strong>State file versioning and backups</strong> to audit changes</li>
+</ul>
+<h3 id="benefits-for-clah-security-posture">Benefits for CLAH Security Posture<a class="headerlink" href="#benefits-for-clah-security-posture" title="Permanent link">&para;</a></h3>
+<p>Using Terraform alongside Vault strengthens CLAH’s overall security by:</p>
+<ul>
+<li>Enabling dynamic, short-lived credentials</li>
+<li>Automating secure key rotation</li>
+<li>Minimizing the risk of leaked secrets</li>
+<li>Improving auditability of secret usage and access</li>
+</ul>
+<p>Terraform’s mature security model aligns well with CLAH’s goal of building a <strong>secure, automated, and maintainable infrastructure stack</strong>.</p>
+<h2 id="limitations-and-mitigations">Limitations and Mitigations<a class="headerlink" href="#limitations-and-mitigations" title="Permanent link">&para;</a></h2>
+<p>While Terraform is a powerful tool for Infrastructure as Application Code, it has some limitations that are important to acknowledge in the context of CLAH. Understanding these challenges helps in planning appropriate mitigations.</p>
+<h3 id="limitations">Limitations<a class="headerlink" href="#limitations" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>State Management Complexity</strong>: Managing state files can become challenging as the infrastructure grows, especially in multi-user or multi-environment scenarios.</li>
+<li><strong>Imperative Logic Limitations</strong>: Terraform is primarily declarative and lacks full support for complex imperative workflows or conditional logic without external scripting.</li>
+<li><strong>Provider Ecosystem Gaps</strong>: Although extensive, some providers or resource types may have incomplete support or delayed updates.</li>
+<li><strong>Learning Curve</strong>: Terraform’s domain-specific language (HCL) and concepts like modules, providers, and state require initial investment to master.</li>
+</ul>
+<h3 id="mitigations-in-clah">Mitigations in CLAH<a class="headerlink" href="#mitigations-in-clah" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Remote State Backends</strong>: Use of remote, encrypted backends (e.g., Consul, Vault, or cloud storage) to centralize state and support collaboration.</li>
+<li><strong>Complementary Tools</strong>: Employ external scripting, CI/CD pipelines, or configuration management tools (e.g., Ansible) for complex workflows alongside Terraform.</li>
+<li><strong>Community and Custom Providers</strong>: Extend functionality by creating or leveraging custom providers and modules when official ones lack features.</li>
+<li><strong>Documentation and Training</strong>: Invest in thorough documentation and developer onboarding to lower the barrier to entry.</li>
+</ul>
+<h3 id="conclusion">Conclusion<a class="headerlink" href="#conclusion" title="Permanent link">&para;</a></h3>
+<p>By proactively addressing these limitations, CLAH leverages Terraform’s strengths while minimizing potential risks, resulting in a resilient, scalable, and maintainable infrastructure automation foundation.</p>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2025 Simone Esposito
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["toc.integrate", "navigation.tabs", "navigation.tabs.sticky", "navigation.top", "content.code.copy", "content.code.select", "content.code.annotate"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+        <script src="../../js/open_in_new_tab.js"></script>
+      
+    
+  </body>
+</html>
