@@ -1,0 +1,254 @@
+{
+    "config": {
+        "description": "Manage infrastructure service config",
+        "source" : "bin/sc.sh",
+        "usage" : "<action> [OPTIONS]",
+        "subcommands": {
+            "ls": {
+                "description": "Get information about a path in service config",
+                "function" : "service_config_ls",
+                "flags": [
+                    {
+                        "short": "v",
+                        "long": "value",
+                        "description": "Show value of matching pattern path",
+                        "arg_mandatory" : "false"
+                    }
+                ]
+            },
+            "set": {
+                "description": "Configure a key on the vault",
+                "function" : "service_config_set",
+                "flags": [
+                    {
+                        "short": "f",
+                        "long": "file",
+                        "description": "Use this for load a list of keys",
+                        "arg_mandatory" : "true"
+                    }
+                ]
+            },
+            "rm": {
+                "description": "Remove a single key from service config",
+                "function" : "service_config_rm",
+                "flags": [
+                    {
+                        "short": "f",
+                        "long": "force",
+                        "description": "Force remove without asking",
+                        "arg_mandatory" : "false"
+                    }
+                ]
+            },
+            "get": {
+                "description": "Retrieve a single key from service config",
+                "function" : "service_config_get",
+                "flags": [
+                ]
+            }
+        }
+    },
+    "networks": {
+        "description": "Manage infrastructure networks",
+        "usage": "<action> [ -e | --env ENVNAME ] [OPTIONS]",
+        "source" : "bin/networks.sh",
+        "flags": [
+            {
+                "short" : "e",
+                "long" : "env",
+                "description" : "Use this env instead of default",
+                "arg_mandatory" : "true"
+            }
+        ],
+        "subcommands": {
+            "get": {
+                "description" : "Show Information about network(s)",
+                "function" : "networks_get",
+                "usage": "NAME",
+                "flags": [
+
+                ]
+            },
+            "create": {
+                "description" : "Manage network for an environment",
+                "function" : "networks_create",
+                "usage" : "NAME [-t | --type TYPE] [-s | --subnet SUBNET] [-g | --gateway GATEWAY] [-l | --description DESCRIPTION]",
+                "flags" : [
+                    {
+                        "short": "d",
+                        "long": "domain",
+                        "description": "Provide domain for this network",
+                        "arg_mandatory": "true"
+                    },
+                    {
+                        "short": "s",
+                        "long": "subnet",
+                        "description" : "Provide subnet for network",
+                        "arg_mandatory": "true"
+                    },
+                    {
+                        "short": "g",
+                        "long": "gateway",
+                        "description" : "Provide gateway for network",
+                        "arg_mandatory": "true"
+                    },
+                    {
+                        "short": "l",
+                        "long": "description",
+                        "description" : "Provide description for network",
+                        "arg_mandatory": "true"
+                    },
+                    {
+                        "short": "t",
+                        "long": "type",
+                        "description" : "Provide type for network (only 'app' and 'provider' values are accepted. default: app",
+                        "arg_mandatory": "true"
+                    }
+                ]
+            },            
+            "rm": {
+                "description" : "Remove a network",
+                "function" : "networks_rm"
+            },
+            "ls": {
+                "description" : "List all networks",
+                "function" : "networks_ls",
+                "usage" : "",
+                "flags": [
+                    
+                ]
+            }
+        }
+    },
+    "tf": {
+        "description" : "Apply or destroy a terraform project",
+        "source" : "bin/tf.sh",
+        "subcommands": {
+            "apply": {
+                "description": "Apply terraform project",
+                "function" : "tf_apply"
+            },
+            "destroy": {
+                "description": "Destroy terraform project",
+                "function" : "tf_destroy"
+            }
+        },
+        "flags": [
+            {
+                "short": "d",
+                "long": "dir",
+                "description": "Specify terraform project directory",
+                "arg_mandatory" : "true"
+            }
+        ]
+    },
+    "apply" : {
+        "description": "Perform a terraform apply on a terraform project",
+        "usage" : "ENV <action> [OPTIONS]",
+        "source" : "bin/apply.sh",
+        "main" : "apply_terraform",
+        "subcommands": {
+        },
+        "flags": [
+            {
+                "short": "y",
+                "long": "yes",
+                "description": "Use -auto-approve terraform's option",
+                "arg_mandatory": "false"
+            }
+        ]
+    },
+    "destroy" : {
+        "description": "Perform a terraform destroy on a terraform project",
+        "usage" : "ENV <action> [OPTIONS]",
+        "source" : "bin/apply.sh",
+        "main" : "destroy_terraform",
+        "subcommands": {
+        },
+        "flags": [
+            {
+                "short": "y",
+                "long": "yes",
+                "description": "Use -auto-approve terraform's option",
+                "arg_mandatory": "false"
+            }
+        ]
+    },
+    "env" : {
+        "description" : "Manage environment",
+        "usage" : "<action> [OPTIONS]",
+        "source": "bin/env.sh",
+        "subcommands" : {
+            "show" : {
+                "description" : "Show Information about environment(s)",
+                "function" : "show_env",
+                "usage": "NAME",
+                "flags": [
+                    {
+                        "short" : "a",
+                        "long": "all",
+                        "description": "Show all environments",
+                        "arg_mandatory": "false"
+                    }
+                ]
+            },
+            "create": {
+                "description": "Create a new environment",
+                "function": "create_env",
+                "usage": "NAME [-d DESCRIPTION] [ -u UUID]",
+                "flags" : [
+                    {
+                        "short" : "d",
+                        "long": "description",
+                        "description" : "Short description for environment",
+                        "arg_mandatory": "true"
+                    },
+                    {
+                        "short" : "u",
+                        "long" : "uuid",
+                        "description" : "Force UUID for environment to create",
+                        "arg_mandatory": "true"
+                    }
+                ]
+            },
+            "rm": {
+                "description" : "Remove an environment",
+                "function": "remove_env",
+                "usage" : "NAME",
+                "flags": [
+                    {
+                        "short" : "f",
+                        "long" : "force",
+                        "description" : "Remove an environment. Do not check any object deployed!",
+                        "arg_mandatory" : false
+                    }
+                ]
+            },
+            "use": {
+                "description" : "Set default environment",
+                "function": "use_env",
+                "usage" : "NAME",
+                "flags": []
+            },
+            "edit": {
+                "description": "Edit an environment",
+                "function": "edit_env",
+                "usage" : "NAME [ -n | --name NEWNAME ] [ -d | --description DESCRIPTION ]",
+                "flags" : [
+                    {
+                        "short": "n",
+                        "long": "name",
+                        "description": "Provide name to edit",
+                        "arg_mandatory": "true"
+                    },
+                    {
+                        "short": "d",
+                        "long": "description",
+                        "description": "Specify Description",
+                        "arg_mandatory" : "true"
+                    }
+                ]
+            }
+        }
+    }
+}

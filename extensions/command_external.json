@@ -1,0 +1,24 @@
+{  
+    "tf-ext": {
+        "description" : "Apply or destroy a terraform project custom",
+        "source" : "bin/tf.sh",
+        "subcommands": {
+            "apply": {
+                "description": "Apply terraform project",
+                "function" : "tf_apply"
+            },
+            "destroy": {
+                "description": "Destroy terraform project",
+                "function" : "tf_destroy"
+            }
+        },
+        "flags": [
+            {
+                "short": "d",
+                "long": "dir",
+                "description": "Specify terraform project directory",
+                "arg_mandatory" : "true"
+            }
+        ]
+    }
+}
