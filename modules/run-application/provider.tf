@@ -3,12 +3,12 @@ terraform {
 
   required_providers {
     docker = {
-      source  = "cybershard/docker"
-      version = "1.0.0"
+      source  = "kreuzwerker/docker"
+      version = "3.6.0"
     }
     consul = {
       source  = "hashicorp/consul"
-      version = "2.23.0"
+      version = "2.22.1"
     }
     random = {
       source  = "hashicorp/random"

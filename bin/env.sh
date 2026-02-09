@@ -26,6 +26,7 @@ create_env()
 
     CREATED_AT=$(generate_timestamp)
     UUID_V4=$(generate_uuid)
+    SHORT_NAME="${NAME:0:1}"
 
     PREFIX_KEY_ENV="environments/data/${UUID_V4}"
 
@@ -38,6 +39,7 @@ create_env()
     set_value_service_config ${PREFIX_KEY_ENV}/uuid ${UUID_V4};
     set_value_service_config ${PREFIX_KEY_ENV}/created_at "${CREATED_AT}";
     set_value_service_config ${PREFIX_KEY_ENV}/description "${DESCRIPTION}";
+    set_value_service_config ${PREFIX_KEY_ENV}/short-name "${SHORT_NAME}";
     set_value_service_config "environments/list-by-name" "${NEW_JSON_LIST_NAME}"
     set_value_service_config "environments/list-by-uuid" "${NEW_JSON_LIST_UUID}"
     

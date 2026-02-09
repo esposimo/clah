@@ -113,7 +113,6 @@ resource "docker_volume" "managed" {
 
   name          = each.value.name
   driver        = "local"
-  force_destroy = each.value.destroy_on_recreate
 }
 
 resource "docker_container" "this" {

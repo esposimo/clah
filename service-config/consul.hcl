@@ -18,6 +18,10 @@ ports {
   http = 8500
 }
 
+ui_config {
+  enabled = true
+}
+
 # Disabilita ACL
 acl {
   enabled = false

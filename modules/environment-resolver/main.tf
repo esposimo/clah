@@ -11,5 +11,3 @@ locals {
   environment = jsondecode(data.consul_keys.list-env-by-name.var.list)
   env_uuid    = local.environment[var.env].uuid
 }
-
-

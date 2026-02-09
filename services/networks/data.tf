@@ -14,7 +14,7 @@ locals {
     env-uuid                        = module.environment-resolver.env_uuid
     networks-registry               = module.env-networks-registry.networks-list
 
-    provider-network-name           = "provider-${var.short-env}-${local.networks-registry.list-names.provider}"
+    provider-network-name           = "${local.networks-registry.list-names.provider}"
     provider-network-uuid           = local.networks-registry.list-uuid.provider
     provider-network-subnet         = local.networks-registry.details[local.provider-network-uuid].subnet
     provider-network-gateway        = local.networks-registry.details[local.provider-network-uuid].gateway
@@ -23,7 +23,7 @@ locals {
     apps-details = {
         for name, uuid in local.networks-registry.list-by-name.apps :
         uuid => {
-            name      = "app-${var.short-env}-${name}"
+            name      = "${name}"
             uuid      = uuid
             subnet    = local.networks-registry.details[uuid].subnet
             gateway   = local.networks-registry.details[uuid].gateway

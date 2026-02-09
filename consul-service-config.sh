@@ -1,9 +1,5 @@
 #!/bin/bash
 
-
-
-
-
 RED="\033[31m"
 GREEN="\033[32m"
 RESET="\033[0m"
@@ -30,7 +26,7 @@ set_value()
   printf "%s" "$KEY_VALUE" > ${CURL_TEMP_FILE};
   curl --request PUT \
    --data @${CURL_TEMP_FILE} \
-   ${CLAH_SC_ENDPOINT}/v1/kv/${KEY_NAME} 2>/dev/null 1>&2 || { print_ko "Error on insert ${KEY_NAME}"; exit 1;};
+   ${CLAH_SC_ENDPOINT}/v1/kv/${KEY_NAME} 2>/dev/null 1>&2 || { error_msg "Error on insert ${KEY_NAME}"; exit 1;};
   rm -f ${CURL_TEMP_FILE};
 }
 
@@ -47,8 +43,6 @@ CLAH_SC_VOLUME_NAME="${CLAH_SC_VOLUME_NAME=tf-data-volume}"
 CLAH_SC_HOST_PORT="${CLAH_SC_HOST_PORT=16080}"
 CLAH_SC_ENDPOINT="http://${DOCKER_HOST_IP}:${CLAH_SC_HOST_PORT}"
 RUN_DIR=$(cd "$(dirname $0)" && pwd)
-
-source "${RUN_DIR}/lib/service-config-function.sh"
 
 create_service_config()
 {
@@ -82,14 +76,6 @@ create_service_config()
   set_value "infrastructure/service-config/container/volume-data" "${CLAH_SC_VOLUME_NAME}"
   set_value "environments/list-by-name" "{}";
   set_value "environments/list-by-uuid" "{}";
-  
-  #put_kv "infrastructure/consul-tf-service/container/name" "${TF_DATA_CONTAINER_NAME}"
-  #put_kv "infrastructure/consul-tf-service/container/image" "${TF_DATA_CONTAINER_IMAGE}" 
-  #put_kv "infrastructure/consul-tf-service/container/consul_image" "${TF_DATA_BASE_IMAGE}"
-  #put_kv "infrastructure/consul-tf-service/container/volume-data" "${CLAH_SC_VOLUME_NAME}"
-  #put_kv "infrastructure/docker/ip" "${DOCKER_HOST_IP}"
-  #put_kv "infrastructure/docker/port" "2375"
-  #put_kv "infrastructure/docker/endpoint" "tcp://${DOCKER_HOST_IP}:2375"
 }
 
 destroy_service_config()
