@@ -18,3 +18,9 @@ variable "containers_spec_file" {
   type        = string
   description = "Path to a JSON file describing containers to deploy"
 }
+
+variable "application_name" {
+  type        = string
+  description = "Logical application name used for Consul indexes; defaults to containers_spec_file basename"
+  default     = null
+}
