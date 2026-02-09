@@ -89,6 +89,8 @@ locals {
       for key, value in container.environment_vars : "${key}=${value}"
     ]
   }
+
+  resolved_application_name = coalesce(var.application_name, trimprefix(trimsuffix(basename(var.containers_spec_file), ".json"), "./"))
 }
 
 resource "random_uuid" "application" {}
@@ -217,8 +219,50 @@ locals {
       }
     )
   }
+
+
+  application_containers_by_name = {
+    for container_name, container in local.containers :
+    container_name => {
+      uuid     = random_uuid.container[container_name].result
+      app      = local.resolved_application_name
+      app_uuid = random_uuid.application.result
+    }
+  }
+
+  application_index_entries = merge(
+    {
+      for container_name, item in local.application_containers_by_name :
+      "indexes/applications/by-name/${module.environment.env_uuid}/containers/${container_name}" => jsonencode({
+        name          = container_name
+        "container-uid" = item.uuid
+        app           = item.app
+        "app-uuid"      = item.app_uuid
+      })
+    },
+    {
+      "indexes/applications/by-apps/${module.environment.env_uuid}/apps/${local.resolved_application_name}" = jsonencode({
+        for container_name, item in local.application_containers_by_name :
+        container_name => {
+          uuid       = item.uuid
+          app        = item.app
+          "app-uuid"   = item.app_uuid
+        }
+      })
+    }
+  )
 }
 
+resource "consul_keys" "application_indexes" {
+  dynamic "key" {
+    for_each = local.application_index_entries
+    content {
+      path   = key.key
+      value  = key.value
+      delete = true
+    }
+  }
+}
 resource "consul_keys" "application_registry" {
   for_each = local.container_consul_entries
 

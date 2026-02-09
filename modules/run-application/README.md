@@ -21,6 +21,7 @@ Il nome richiesto `run-application` è coerente e chiaro. In alternativa, solo s
 | `application_network_name` | `string` | Rete applicativa obbligatoria su cui collegare tutti i container |
 | `attach_infrastructure_network` | `bool` | Se `true`, collega tutti i container anche alla rete provider |
 | `containers_spec_file` | `string` | Path file JSON con la definizione dei container |
+| `application_name` | `string` | Nome logico applicazione per gli indici Consul (`null` => basename di `containers_spec_file` senza `.json`) |
 
 ## Struttura JSON supportata
 ```json
@@ -66,6 +67,9 @@ Il nome richiesto `run-application` è coerente e chiaro. In alternativa, solo s
 - Viene generato un UUID stack (`random_uuid.application`) e un UUID per container (`random_uuid.container`).
 - I metadati vengono scritti in Consul con il path:
   - `applications/<env-uuid>/<app-uuid>/<container-uuid>/...`
+- Vengono aggiornati anche gli indici Consul:
+  - `indexes/applications/by-name/<env-uuid>/containers/<container-name>` => `{ "name": ..., "container-uid": ..., "app": ..., "app-uuid": ... }`
+  - `indexes/applications/by-apps/<env-uuid>/apps/<app-name>` => `{ "<container-name>": { "uuid": ..., "app": ..., "app-uuid": ... } }`
 
 ## Output principali
 - `env_uuid`
