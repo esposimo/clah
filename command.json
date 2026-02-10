@@ -222,6 +222,40 @@
             }
         }
     },
+    "apps": {
+        "description": "Manage environment applications",
+        "usage": "<action> [OPTIONS]",
+        "source": "bin/apps.sh",
+        "flags": [
+            {
+                "short": "e",
+                "long": "env",
+                "description": "Use this env instead of default",
+                "arg_mandatory": "true"
+            }
+        ],
+        "subcommands": {
+            "list": {
+                "description": "List all applications in environment",
+                "function": "apps_list",
+                "usage": "",
+                "flags": []
+            },
+            "show": {
+                "description": "Show details for a single application",
+                "function": "apps_show",
+                "usage": "APPNAME [ -c | --container CONTAINERNAME ]",
+                "flags": [
+                    {
+                        "short": "c",
+                        "long": "container",
+                        "description": "Show details for a specific container",
+                        "arg_mandatory": "true"
+                    }
+                ]
+            }
+        }
+    },
     "sops": {
         "description": "Shortcut for linux sops encryption/decryption",
         "usage": "<action> [OPTIONS] FILENAME",
