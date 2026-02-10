@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on Keep a Changelog,
 and this project adheres to Semantic Versioning.
 
+## [0.1.2] 2026-02-09
+
+### Added
+- nuovo comando `apps` in `command.json` con sintassi `clah apps ACTION [NAME] [OPTIONS]`
+- nuovo script `bin/apps.sh` con subcommands `list` e `show`, supporto opzione globale `-e/--env` e gestione errori per environment inesistente
+- supporto opzione `-c/--container` su `apps show` per visualizzare il dettaglio del container (volumi, porte, devices, image, networks, ip e portmap)
+
 ## [0.1.1] 2026-02-09
 
 ### Added
